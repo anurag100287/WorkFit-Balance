@@ -1,80 +1,101 @@
 <UserForm>:
-    orientation: "vertical"
-    padding: 20
-    spacing: 10
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    Label:
-        text: "WorkFit Balance"
-        font_size: 32
-        color: 0, 0.7, 1, 1
-    TextInput:
-        id: age
-        hint_text: "Enter age (e.g., 30)"
-        multiline: False
-        size_hint: 1, 0.2
-    TextInput:
-        id: weight
-        hint_text: "Enter weight in kg (e.g., 70)"
-        multiline: False
-        size_hint: 1, 0.2
-    TextInput:
-        id: height
-        hint_text: "Enter height in cm (e.g., 170)"
-        multiline: False
-        size_hint: 1, 0.2
-    BoxLayout:
-        size_hint: 1, 0.2
-        Label:
-            text: "Gender:"
-            color: 0, 0, 0, 1
-        Button:
-            text: root.gender
-            on_press: root.gender = "Female" if root.gender == "Male" else "Male"
-    TextInput:
-        id: goal
-        hint_text: "Enter fitness goal (e.g., Weight Loss)"
-        multiline: False
-        size_hint: 1, 0.2
-    TextInput:
-        id: schedule
-        hint_text: "Enter work hours (e.g., 9AM-5PM)"
-        multiline: False
-        size_hint: 1, 0.2
-    Button:
-        text: "Submit"
-        size_hint: 1, 0.2
-        background_color: 0, 0.7, 1, 1
-        on_press: root.submit_form()
-    Label:
-        text: "Workouts:"
-        font_size: 24
-        color: 0, 0, 0, 1
-    BoxLayout:
-        orientation: "vertical"
-        size_hint: 1, 0.3
-        spacing: 5
-        Label:
-            text: root.workouts[0]['name'] if root.workouts else "No workouts"
-            color: 0, 0, 0, 1
-        Label:
-            text: root.workouts[1]['name'] if len(root.workouts) > 1 else ""
-            color: 0, 0, 0, 1
-    Label:
-        text: "Meals:"
-        font_size: 24
-        color: 0, 0, 0, 1
-    BoxLayout:
-        orientation: "vertical"
-        size_hint: 1, 0.3
-        spacing: 5
-        Label:
-            text: root.meals[0]['name'] if root.meals else "No meals"
-            color: 0, 0, 0, 1
-        Label:
-            text: root.meals[1]['name'] if len(root.meals) > 1 else ""
-            color: 0, 0, 0, 1
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            spacing: 15
+            size_hint_y: None
+            height: self.minimum_height
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "WorkFit Balance"
+                font_size: 32
+                color: 0, 0.7, 1, 1
+                size_hint_y: None
+                height: 60
+            TextInput:
+                id: age
+                hint_text: "Enter age (e.g., 30)"
+                multiline: False
+                size_hint: 1, None
+                height: 50
+            TextInput:
+                id: weight
+                hint_text: "Enter weight in kg (e.g., 70)"
+                multiline: False
+                size_hint: 1, None
+                height: 50
+            TextInput:
+                id: height
+                hint_text: "Enter height in cm (e.g., 170)"
+                multiline: False
+                size_hint: 1, None
+                height: 50
+            BoxLayout:
+                size_hint: 1, None
+                height: 50
+                Label:
+                    text: "Gender:"
+                    color: 0, 0, 0, 1
+                Button:
+                    text: root.gender
+                    on_press: root.gender = "Female" if root.gender == "Male" else "Male"
+            TextInput:
+                id: goal
+                hint_text: "Enter fitness goal (e.g., Weight Loss)"
+                multiline: False
+                size_hint: 1, None
+                height: 50
+            TextInput:
+                id: schedule
+                hint_text: "Enter work hours (e.g., 9AM-5PM)"
+                multiline: False
+                size_hint: 1, None
+                height: 50
+            Button:
+                text: "Submit"
+                size_hint: 1, None
+                height: 50
+                background_color: 0, 0.7, 1, 1
+                on_press: root.submit_form()
+            Label:
+                text: "Workouts:"
+                font_size: 24
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None
+                height: 100
+                spacing: 5
+                Label:
+                    text: root.workouts[0]['name'] if root.workouts else "No workouts"
+                    color: 0, 0, 0, 1
+                Label:
+                    text: root.workouts[1]['name'] if len(root.workouts) > 1 else ""
+                    color: 0, 0, 0, 1
+            Label:
+                text: "Meals:"
+                font_size: 24
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None
+                height: 100
+                spacing: 5
+                Label:
+                    text: root.meals[0]['name'] if root.meals else "No meals"
+                    color: 0, 0, 0, 1
+                Label:
+                    text: root.meals[1]['name'] if len(root.meals) > 1 else ""
+                    color: 0, 0, 0, 1
