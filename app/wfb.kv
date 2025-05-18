@@ -1,3 +1,53 @@
-<Label>:
-    font_size: 32
-    color: 0, 0.7, 1, 1  # Blue color (RGBA)
+<UserForm>:
+    orientation: "vertical"
+    padding: 20
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1  # White background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "WorkFit Balance"
+        font_size: 32
+        color: 0, 0.7, 1, 1  # Blue
+    TextInput:
+        id: age
+        hint_text: "Enter age (e.g., 30)"
+        multiline: False
+        size_hint: 1, 0.2
+    TextInput:
+        id: weight
+        hint_text: "Enter weight in kg (e.g., 70)"
+        multiline: False
+        size_hint: 1, 0.2
+    TextInput:
+        id: height
+        hint_text: "Enter height in cm (e.g., 170)"
+        multiline: False
+        size_hint: 1, 0.2
+    BoxLayout:
+        size_hint: 1, 0.2
+        Label:
+            text: "Gender:"
+            color: 0, 0, 0, 1
+        Button:
+            text: root.gender
+            on_press: root.gender = "Female" if root.gender == "Male" else "Male"
+    TextInput:
+        id: goal
+        hint_text: "Enter fitness goal (e.g., Weight Loss)"
+        multiline: False
+        size_hint: 1, 0.2
+    TextInput:
+        id: schedule
+        hint_text: "Enter work hours (e.g., 9AM-5PM)"
+        multiline: False
+        size_hint: 1, 0.2
+    Button:
+        text: "Submit"
+        size_hint: 1, 0.2
+        background_color: 0, 0.7, 1, 1
+        on_press: root.submit_form()
