@@ -1,0 +1,4 @@
+kivy
+flask
+scikit-learn
+python-dotenv
