@@ -1,10 +1,12 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ListProperty
 import requests
 
 class UserForm(BoxLayout):
     gender = StringProperty("Male")
+    workouts = ListProperty([])
+    meals = ListProperty([])
 
     def submit_form(self):
         data = {
@@ -17,7 +19,9 @@ class UserForm(BoxLayout):
         }
         try:
             response = requests.post("http://localhost:5000/submit", json=data)
-            print(f"Server response: {response.json()}")
+            result = response.json()
+            self.workouts = result.get('workouts', [])
+            self.meals = result.get('meals', [])
         except Exception as e:
             print(f"Error: {e}")
 

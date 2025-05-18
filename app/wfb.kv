@@ -4,15 +4,14 @@
     spacing: 10
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 1  # White background
+            rgba: 1, 1, 1, 1
         Rectangle:
             pos: self.pos
             size: self.size
-
     Label:
         text: "WorkFit Balance"
         font_size: 32
-        color: 0, 0.7, 1, 1  # Blue
+        color: 0, 0.7, 1, 1
     TextInput:
         id: age
         hint_text: "Enter age (e.g., 30)"
@@ -51,3 +50,31 @@
         size_hint: 1, 0.2
         background_color: 0, 0.7, 1, 1
         on_press: root.submit_form()
+    Label:
+        text: "Workouts:"
+        font_size: 24
+        color: 0, 0, 0, 1
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 0.3
+        spacing: 5
+        Label:
+            text: root.workouts[0]['name'] if root.workouts else "No workouts"
+            color: 0, 0, 0, 1
+        Label:
+            text: root.workouts[1]['name'] if len(root.workouts) > 1 else ""
+            color: 0, 0, 0, 1
+    Label:
+        text: "Meals:"
+        font_size: 24
+        color: 0, 0, 0, 1
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 0.3
+        spacing: 5
+        Label:
+            text: root.meals[0]['name'] if root.meals else "No meals"
+            color: 0, 0, 0, 1
+        Label:
+            text: root.meals[1]['name'] if len(root.meals) > 1 else ""
+            color: 0, 0, 0, 1
