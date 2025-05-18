@@ -1,57 +1,22 @@
 [
-    {
-        "id": 1,
-        "name": "Chicken Biryani",
-        "type": "non-vegetarian",
-        "calories": 600,
-        "protein": 30,
-        "carbs": 80,
-        "fat": 20,
-        "meal_type": "lunch",
-        "prep_time_minutes": 40
-    },
-    {
-        "id": 2,
-        "name": "Paneer Tikka",
-        "type": "vegetarian",
-        "calories": 400,
-        "protein": 20,
-        "carbs": 30,
-        "fat": 25,
-        "meal_type": "dinner",
-        "prep_time_minutes": 30
-    },
-    {
-        "id": 3,
-        "name": "Dal Tadka with Rice",
-        "type": "vegetarian",
-        "calories": 500,
-        "protein": 15,
-        "carbs": 70,
-        "fat": 15,
-        "meal_type": "lunch",
-        "prep_time_minutes": 25
-    },
-    {
-        "id": 4,
-        "name": "Grilled Fish",
-        "type": "non-vegetarian",
-        "calories": 350,
-        "protein": 35,
-        "carbs": 10,
-        "fat": 15,
-        "meal_type": "dinner",
-        "prep_time_minutes": 20
-    },
-    {
-        "id": 5,
-        "name": "Vegetable Pulao",
-        "type": "vegetarian",
-        "calories": 450,
-        "protein": 10,
-        "carbs": 75,
-        "fat": 12,
-        "meal_type": "lunch",
-        "prep_time_minutes": 30
-    }
+    {"id": 1, "name": "Chicken Biryani", "type": "non-vegetarian", "calories": 600, "protein": 30, "carbs": 80, "fat": 20, "meal_type": "lunch", "prep_time_minutes": 40},
+    {"id": 2, "name": "Paneer Tikka", "type": "vegetarian", "calories": 400, "protein": 20, "carbs": 30, "fat": 25, "meal_type": "dinner", "prep_time_minutes": 30},
+    {"id": 3, "name": "Dal Tadka with Rice", "type": "vegetarian", "calories": 500, "protein": 15, "carbs": 70, "fat": 15, "meal_type": "lunch", "prep_time_minutes": 25},
+    {"id": 4, "name": "Grilled Fish", "type": "non-vegetarian", "calories": 350, "protein": 35, "carbs": 10, "fat": 15, "meal_type": "dinner", "prep_time_minutes": 20},
+    {"id": 5, "name": "Vegetable Pulao", "type": "vegetarian", "calories": 450, "protein": 10, "carbs": 75, "fat": 12, "meal_type": "lunch", "prep_time_minutes": 30},
+    {"id": 6, "name": "Butter Chicken", "type": "non-vegetarian", "calories": 550, "protein": 28, "carbs": 20, "fat": 30, "meal_type": "dinner", "prep_time_minutes": 35},
+    {"id": 7, "name": "Rajma Chawal", "type": "vegetarian", "calories": 480, "protein": 18, "carbs": 65, "fat": 10, "meal_type": "lunch", "prep_time_minutes": 30},
+    {"id": 8, "name": "Egg Curry", "type": "non-vegetarian", "calories": 400, "protein": 22, "carbs": 15, "fat": 20, "meal_type": "dinner", "prep_time_minutes": 25},
+    {"id": 9, "name": "Aloo Paratha", "type": "vegetarian", "calories": 450, "protein": 10, "carbs": 60, "fat": 18, "meal_type": "breakfast", "prep_time_minutes": 20},
+    {"id": 10, "name": "Fish Fry", "type": "non-vegetarian", "calories": 380, "protein": 30, "carbs": 5, "fat": 22, "meal_type": "dinner", "prep_time_minutes": 15},
+    {"id": 11, "name": "Chole Bhature", "type": "vegetarian", "calories": 600, "protein": 15, "carbs": 80, "fat": 25, "meal_type": "lunch", "prep_time_minutes": 40},
+    {"id": 12, "name": "Chicken Tikka", "type": "non-vegetarian", "calories": 420, "protein": 35, "carbs": 10, "fat": 20, "meal_type": "dinner", "prep_time_minutes": 30},
+    {"id": 13, "name": "Palak Paneer", "type": "vegetarian", "calories": 400, "protein": 18, "carbs": 25, "fat": 22, "meal_type": "dinner", "prep_time_minutes": 25},
+    {"id": 14, "name": "Mutton Curry", "type": "non-vegetarian", "calories": 580, "protein": 30, "carbs": 15, "fat": 35, "meal_type": "lunch", "prep_time_minutes": 45},
+    {"id": 15, "name": "Veg Biryani", "type": "vegetarian", "calories": 460, "protein": 12, "carbs": 70, "fat": 15, "meal_type": "lunch", "prep_time_minutes": 35},
+    {"id": 16, "name": "Prawn Curry", "type": "non-vegetarian", "calories": 390, "protein": 28, "carbs": 10, "fat": 18, "meal_type": "dinner", "prep_time_minutes": 20},
+    {"id": 17, "name": "Masala Dosa", "type": "vegetarian", "calories": 400, "protein": 10, "carbs": 60, "fat": 12, "meal_type": "breakfast", "prep_time_minutes": 25},
+    {"id": 18, "name": "Chicken Fried Rice", "type": "non-vegetarian", "calories": 500, "protein": 25, "carbs": 65, "fat": 15, "meal_type": "lunch", "prep_time_minutes": 30},
+    {"id": 19, "name": "Bhindi Masala", "type": "vegetarian", "calories": 350, "protein": 8, "carbs": 30, "fat": 20, "meal_type": "dinner", "prep_time_minutes": 20},
+    {"id": 20, "name": "Tandoori Chicken", "type": "non-vegetarian", "calories": 430, "protein": 32, "carbs": 5, "fat": 22, "meal_type": "dinner", "prep_time_minutes": 35}
 ]

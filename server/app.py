@@ -34,18 +34,19 @@ def load_datasets():
 def calculate_bmi(weight, height):
     try:
         weight = float(weight)
-        height = float(height) / 100  # Convert cm to meters
+        height = float(height) / 100
         bmi = weight / (height * height)
         return bmi
     except:
-        return 25.0  # Default BMI if parsing fails
+        return 25.0
 
 def recommend(user_data, items, item_type):
     goal = user_data.get('goal', '').lower()
     schedule = user_data.get('schedule', '').lower()
+    gender = user_data.get('gender', '').lower()
+    age = float(user_data.get('age', '30'))
     bmi = calculate_bmi(user_data.get('weight', '70'), user_data.get('height', '170'))
-    # Parse work hours duration
-    work_duration = 8  # Default 8 hours
+    work_duration = 8
     if schedule:
         try:
             start, end = schedule.split('-')
@@ -59,12 +60,14 @@ def recommend(user_data, items, item_type):
         except:
             pass
 
-    # User feature vector: [goal_weight_loss, goal_muscle_gain, bmi_score, free_time_score]
+    # User vector: [goal_weight_loss, goal_muscle_gain, bmi_score, free_time_score, age_score, gender_score]
     user_vector = [
         1 if goal == 'weight loss' else 0,
         1 if goal == 'muscle gain' else 0,
-        min(bmi / 30, 1.0),  # Normalize BMI (30 as upper bound)
-        1 - (work_duration / 24)  # More free time → higher score
+        min(bmi / 30, 1.0),
+        1 - (work_duration / 24),
+        1 - (age / 60) if age <= 60 else 0.5,  # Lower intensity for older age
+        1 if gender == 'male' else 0.8  # Slightly higher intensity for males
     ]
 
     item_vectors = []
@@ -72,32 +75,42 @@ def recommend(user_data, items, item_type):
         goal_score = 0
         bmi_score = 0
         duration_score = 0
+        age_score = 0
+        gender_score = 0
         if item_type == 'workout':
             if goal == 'weight loss' and item['type'] == 'bodyweight':
                 goal_score = 1
             elif goal == 'muscle gain' and item['type'] == 'strength':
                 goal_score = 1
-            # BMI: Lower intensity for higher BMI
+            # BMI: Lower intensity for high BMI
             bmi_score = 1 if bmi < 25 and item['calories_burned'] > 200 else 0.5
-            # Shorter workouts for less free time
+            # Duration: Shorter for busy schedules
             duration = item.get('duration_minutes', 20)
             duration_score = 1 if duration <= 20 and work_duration > 8 else 0.7
+            # Age: Easier workouts for older users
+            age_score = 1 if age < 40 and item['muscle_group'] != 'core' else 0.6
+            # Gender: More upper body for males
+            gender_score = 1 if gender == 'male' and item['muscle_group'] in ['chest', 'back'] else 0.8
         elif item_type == 'meal':
             if goal == 'weight loss' and item['calories'] < 500:
                 goal_score = 1
             elif goal == 'muscle gain' and item['protein'] > 20:
                 goal_score = 1
-            # BMI: Lower calories for higher BMI
+            # BMI: Lower calories for high BMI
             bmi_score = 1 if bmi < 25 or item['calories'] < 400 else 0.5
-            # Quick prep for busy schedules
+            # Prep time: Quick for busy schedules
             prep_time = item.get('prep_time_minutes', 30)
             duration_score = 1 if prep_time <= 30 and work_duration > 8 else 0.7
-        item_vectors.append([goal_score, goal_score, bmi_score, duration_score])
+            # Age: Lighter meals for older users
+            age_score = 1 if age < 40 and item['meal_type'] != 'breakfast' else 0.6
+            # Gender: Higher protein for males
+            gender_score = 1 if gender == 'male' and item['protein'] > 25 else 0.8
+        item_vectors.append([goal_score, goal_score, bmi_score, duration_score, age_score, gender_score])
 
     if not item_vectors:
         return []
     similarities = cosine_similarity([user_vector], item_vectors)[0]
-    ranked = sorted(zip(similarities, items), key=lambda x: x[0], reverse=True)[:2]
+    ranked = sorted(zip(similarities, items), key=lambda x: x[0], reverse=True)[:3]  # Top 3 for variety
     return [item for _, item in ranked]
 
 def create_schedule(user_data, workouts, meals):
@@ -118,7 +131,7 @@ def create_schedule(user_data, workouts, meals):
     daily_schedule = {
         "7:00 AM": {"type": "meal", "name": meals[0]['name'] if meals else "Breakfast"},
         "12:00 PM": {"type": "meal", "name": meals[1]['name'] if len(meals) > 1 else "Lunch"},
-        "7:00 PM": {"type": "meal", "name": meals[0]['name'] if meals else "Dinner"},
+        "7:00 PM": {"type": "meal", "name": meals[2]['name'] if len(meals) > 2 else "Dinner"},
         "6:00 PM": {"type": "workout", "name": workouts[0]['name'] if workouts else "Workout"}
     }
     if work_hours:
