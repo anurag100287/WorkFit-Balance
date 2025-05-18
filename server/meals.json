@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "name": "Chicken Biryani",
+        "type": "non-vegetarian",
+        "calories": 600,
+        "protein": 30,
+        "carbs": 80,
+        "fat": 20,
+        "meal_type": "lunch",
+        "prep_time_minutes": 40
+    },
+    {
+        "id": 2,
+        "name": "Paneer Tikka",
+        "type": "vegetarian",
+        "calories": 400,
+        "protein": 20,
+        "carbs": 30,
+        "fat": 25,
+        "meal_type": "dinner",
+        "prep_time_minutes": 30
+    },
+    {
+        "id": 3,
+        "name": "Dal Tadka with Rice",
+        "type": "vegetarian",
+        "calories": 500,
+        "protein": 15,
+        "carbs": 70,
+        "fat": 15,
+        "meal_type": "lunch",
+        "prep_time_minutes": 25
+    },
+    {
+        "id": 4,
+        "name": "Grilled Fish",
+        "type": "non-vegetarian",
+        "calories": 350,
+        "protein": 35,
+        "carbs": 10,
+        "fat": 15,
+        "meal_type": "dinner",
+        "prep_time_minutes": 20
+    },
+    {
+        "id": 5,
+        "name": "Vegetable Pulao",
+        "type": "vegetarian",
+        "calories": 450,
+        "protein": 10,
+        "carbs": 75,
+        "fat": 12,
+        "meal_type": "lunch",
+        "prep_time_minutes": 30
+    }
+]
