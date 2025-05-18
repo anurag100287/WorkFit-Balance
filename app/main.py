@@ -1,15 +1,25 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
+import requests
 
 class UserForm(BoxLayout):
-    gender = StringProperty("Male")  # Default gender
+    gender = StringProperty("Male")
 
     def submit_form(self):
-        # Placeholder for form submission
-        print(f"Age: {self.ids.age.text}, Weight: {self.ids.weight.text}, "
-              f"Height: {self.ids.height.text}, Gender: {self.gender}, "
-              f"Goal: {self.ids.goal.text}, Schedule: {self.ids.schedule.text}")
+        data = {
+            "age": self.ids.age.text,
+            "weight": self.ids.weight.text,
+            "height": self.ids.height.text,
+            "gender": self.gender,
+            "goal": self.ids.goal.text,
+            "schedule": self.ids.schedule.text
+        }
+        try:
+            response = requests.post("http://localhost:5000/submit", json=data)
+            print(f"Server response: {response.json()}")
+        except Exception as e:
+            print(f"Error: {e}")
 
 class WfbApp(App):
     def build(self):
