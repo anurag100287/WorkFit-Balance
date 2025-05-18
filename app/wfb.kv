@@ -99,3 +99,26 @@
                 Label:
                     text: root.meals[1]['name'] if len(root.meals) > 1 else ""
                     color: 0, 0, 0, 1
+            Label:
+                text: "Daily Schedule:"
+                font_size: 24
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None
+                height: 150
+                spacing: 5
+                Label:
+                    text: f"7:00 AM: {root.schedule['7:00 AM']['name']}" if '7:00 AM' in root.schedule else "7:00 AM: None"
+                    color: 0, 0, 0, 1
+                Label:
+                    text: f"12:00 PM: {root.schedule['12:00 PM']['name']}" if '12:00 PM' in root.schedule else "12:00 PM: None"
+                    color: 0, 0, 0, 1
+                Label:
+                    text: f"6:00 PM: {root.schedule['6:00 PM']['name']}" if '6:00 PM' in root.schedule else "6:00 PM: None"
+                    color: 0, 0, 0, 1
+                Label:
+                    text: f"7:00 PM: {root.schedule['7:00 PM']['name']}" if '7:00 PM' in root.schedule else "7:00 PM: None"
+                    color: 0, 0, 0, 1

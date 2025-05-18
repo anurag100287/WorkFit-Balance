@@ -32,7 +32,6 @@ def load_datasets():
     return workouts, meals
 
 def recommend(user_data, items, item_type):
-    # Simple feature vector: goal-based scoring
     goal = user_data.get('goal', '').lower()
     user_vector = [1 if goal in ['weight loss', 'muscle gain'] else 0]
     item_vectors = []
@@ -52,9 +51,44 @@ def recommend(user_data, items, item_type):
     if not item_vectors:
         return []
     similarities = cosine_similarity([user_vector], item_vectors)[0]
-    # Sort by similarity score
     ranked = sorted(zip(similarities, items), key=lambda x: x[0], reverse=True)[:2]
     return [item for _, item in ranked]
+
+def create_schedule(user_data, workouts, meals):
+    schedule = user_data.get('schedule', '').lower()
+    # Parse work hours (e.g., "9am-5pm")
+    work_hours = []
+    if schedule:
+        try:
+            start, end = schedule.split('-')
+            start_hour = int(start.replace('am', '').replace('pm', '').strip())
+            end_hour = int(end.replace('am', '').replace('pm', '').strip())
+            if 'pm' in end.lower() and end_hour < 12:
+                end_hour += 12
+            if 'pm' in start.lower() and start_hour < 12:
+                start_hour += 12
+            work_hours = list(range(start_hour, end_hour + 1))
+        except:
+            work_hours = []
+    # Simple schedule: breakfast, lunch, dinner, one workout
+    daily_schedule = {
+        "7:00 AM": {"type": "meal", "name": meals[0]['name'] if meals else "Breakfast"},
+        "12:00 PM": {"type": "meal", "name": meals[1]['name'] if len(meals) > 1 else "Lunch"},
+        "7:00 PM": {"type": "meal", "name": meals[0]['name'] if meals else "Dinner"},
+        "6:00 PM": {"type": "workout", "name": workouts[0]['name'] if workouts else "Workout"}
+    }
+    # Adjust workout time if it conflicts with work hours
+    if work_hours:
+        workout_time = "6:00 PM"
+        workout_hour = 18  # 6:00 PM in 24-hour format
+        if workout_hour in work_hours:
+            # Move workout to after work
+            new_hour = max(work_hours) + 1
+            if new_hour > 23:
+                new_hour = min(work_hours) - 1 if min(work_hours) > 6 else 21
+            new_time = f"{new_hour % 12 or 12}:00 {'AM' if new_hour < 12 else 'PM'}"
+            daily_schedule[new_time] = daily_schedule.pop(workout_time)
+    return daily_schedule
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -69,12 +103,14 @@ def submit():
     workouts, meals = load_datasets()
     recommended_workouts = recommend(data, workouts, 'workout')
     recommended_meals = recommend(data, meals, 'meal')
+    daily_schedule = create_schedule(data, recommended_workouts, recommended_meals)
     print(f"Received and saved: {data}")
     return jsonify({
         "message": "Data saved",
         "data": data,
         "workouts": recommended_workouts,
-        "meals": recommended_meals
+        "meals": recommended_meals,
+        "schedule": daily_schedule
     })
 
 if __name__ == '__main__':
